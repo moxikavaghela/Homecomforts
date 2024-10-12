@@ -18,9 +18,6 @@ jobs:
         with:
           php-version: 7.4 # or the version you are using
 
-      - name: Install dependencies
-        run: composer install --no-progress --no-suggest
-
       - name: Deploy to Server
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
@@ -29,5 +26,5 @@ jobs:
         run: |
           lftp -c "
           open ftp://$FTP_USERNAME:$FTP_PASSWORD@$FTP_SERVER;
-          mirror -R . /path/to/deploy;
+          mirror -R . /htdocs;
           "
